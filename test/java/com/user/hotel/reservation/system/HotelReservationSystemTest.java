@@ -1,10 +1,8 @@
 package com.user.hotel.reservation.system;
 import org.junit.Test;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-
 import static org.junit.Assert.assertEquals;
 public class HotelReservationSystemTest {
     @Test
