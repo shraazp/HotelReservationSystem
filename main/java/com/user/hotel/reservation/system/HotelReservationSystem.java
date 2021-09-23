@@ -34,11 +34,11 @@ public class HotelReservationSystem {
      * @return hotel name
      * @throws ParseException 
      */
-    public String cheapHotel(Date checkIn,Date checkOut)
+    public String cheapestBestHotel(Date checkIn,Date checkOut)
     {
         List<Integer> days=new ArrayList<>();
         Date i=checkIn;
-        while(i.compareTo(checkOut)!=1)
+        while(i.compareTo(checkOut)<1)
         {
             Calendar cal=Calendar.getInstance();
             cal.setTime(i);
@@ -57,6 +57,14 @@ public class HotelReservationSystem {
             {
                 cost=temp;
                 cheapHotel=hotel;
+            }
+            if(cost==temp)
+            {
+                if(cheapHotel.getRatings()<hotel.getRatings())
+                {
+                    cost=temp;
+                    cheapHotel=hotel;
+                }
             }
         } 
         System.out.println("The cheapest hotel is "+cheapHotel.getHotelName()+" for a cost $"+cost);
@@ -82,5 +90,36 @@ public class HotelReservationSystem {
                 temp+=hotel.getWeekendRateRegular();  
         }
         return temp;
+    }
+    /**
+     * method to get best rated hotel and also the cost
+     * @param checkIn the date when you check in the hotel
+     * @param checkOut the day when you leave the hotel
+     * @return the name of the hotel
+     */
+    public String getBestRatedHotel(Date checkIn,Date checkOut)
+    {
+        List<Integer> days=new ArrayList<>();
+        Date i=checkIn;
+        double  ratings=0;
+        Hotel bestHotel=null;
+        while(i.compareTo(checkOut)<1)
+        {
+            Calendar cal=Calendar.getInstance();
+            cal.setTime(i);
+            days.add(cal.get(Calendar.DAY_OF_WEEK));
+            cal.add( Calendar.DATE, 1 );
+            i=cal.getTime();
+        }
+        for(Hotel hotel:hotelReservation)
+        { 
+            if(ratings<hotel.getRatings())
+            {
+                ratings=hotel.getRatings();
+                bestHotel=hotel;
+            }
+        }
+        System.out.println("The best rated hotel is "+bestHotel.getHotelName()+" at a cost of $"+getCost(days, bestHotel));
+        return bestHotel.getHotelName();
     }
 }

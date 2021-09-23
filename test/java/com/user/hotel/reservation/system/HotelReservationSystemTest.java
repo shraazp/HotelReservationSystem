@@ -15,8 +15,10 @@ public class HotelReservationSystemTest {
         int entry=hotelSystem.countHotels();
         assertEquals(3,entry);    
         SimpleDateFormat formatter = new SimpleDateFormat("ddMMMyyyy", Locale.ENGLISH);
-        String entryHotel=hotelSystem.cheapHotel(formatter.parse("11Sep2020"),formatter.parse("12Sep2020"));
-        assertEquals("Lakewood",entryHotel);
+        String entryHotel=hotelSystem.cheapestBestHotel(formatter.parse("11Sep2020"),formatter.parse("12Sep2020"));
+        assertEquals("Bridgewood",entryHotel);
+        String bestHotel=hotelSystem.getBestRatedHotel(formatter.parse("11Sep2020"),formatter.parse("12Sep2020"));
+        assertEquals("Ridgewood",bestHotel);
     }
     
 }
