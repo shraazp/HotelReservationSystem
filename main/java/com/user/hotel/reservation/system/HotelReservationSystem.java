@@ -1,4 +1,6 @@
 package com.user.hotel.reservation.system;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 /**
  * class to store the hotels in a list
@@ -31,25 +33,56 @@ public class HotelReservationSystem {
      * A method to get the hotel whose cost is cheap
      * @param checkIn date when you check in the hotel
      * @param checkOut date when you want to checkout from hotel
-     * use case 2
      * @return hotel name
+     * @throws ParseException 
      */
     public String cheapHotel(Date checkIn,Date checkOut)
     {
-        int days = (int)( (checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24));
-        if(days==0)
-            days=1;
-        double cost=hotelReservation.get(0).getWeekdayRateRegular()*days;
-        String hotelName=hotelReservation.get(0).getHotelName();
-        for(int i=1;i<hotelReservation.size();i++)
+        List<Integer> days=new ArrayList<>();
+        Date i=checkIn;
+        while(i.compareTo(checkOut)==-1)
         {
-            if(cost>hotelReservation.get(i).getWeekdayRateRegular()*days)
-            {
-                cost=hotelReservation.get(i).getWeekdayRateRegular()*days;
-                hotelName=hotelReservation.get(i).getHotelName();
-            }                    
+            Calendar cal=Calendar.getInstance();
+            cal.setTime(i);
+            days.add(cal.get(Calendar.DAY_OF_WEEK));
+            cal.add( Calendar.DATE, 1 );
+            i=cal.getTime();
         }
-        System.out.println("you can stay at hotel "+hotelName+" at a cost "+cost+"$");
-        return hotelName;
-    }   
+        double cost;
+        double temp;
+        Hotel cheapHotel=hotelReservation.get(0);
+        cost=getCost(days,cheapHotel);
+        for(Hotel hotel:hotelReservation)
+        {
+            temp=getCost(days,hotel);
+            if(cost>temp)
+            {
+                cost=temp;
+                cheapHotel=hotel;
+            }
+        } 
+        System.out.println("The cheapest hotel is "+cheapHotel.getHotelName()+" for a cost $"+cost);
+        return cheapHotel.getHotelName();   
+    } 
+    /**
+     * this method to calculate cost of stay for each hotel
+     * @param checkin day when you check in
+     * @param checkout day when you check out
+     * @param hotel hotel for which you want to calculate
+     * @return cost at that particular hotel
+     */
+    public double getCost(List<Integer>days,Hotel hotel)
+    {
+        double temp=0;
+        for(int j:days)
+        {
+            if(j>1&&j<7)
+            { 
+                temp+=hotel.getWeekdayRateRegular();
+            }
+            else
+                temp+=hotel.getWeekendRateRegular();  
+        }
+        return temp;
+    }
 }
