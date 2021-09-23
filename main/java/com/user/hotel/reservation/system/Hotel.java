@@ -7,14 +7,16 @@ public class Hotel {
     private String hotelName;
     private double weekdayRateRegular;
     private double weekendRateRegular;
+    private double ratings;
     /*
      * constructor to initialize the hotel parameters 
      */
-    public Hotel(String hotelName,double weekdayRateRegular,double weekendRateRegular)
+    public Hotel(String hotelName,double weekdayRateRegular,double weekendRateRegular,double ratings)
     {
         this.setHotelName(hotelName);
         this.setWeekdayRateRegular(weekdayRateRegular);
         this.setWeekendRateRegular(weekendRateRegular);
+        this.setRatings(ratings);
     }
     /*
      * getter method to get name of the hotel
@@ -51,5 +53,17 @@ public class Hotel {
      */
     public void setWeekendRateRegular(double weekendRateRegular) {
         this.weekendRateRegular = weekendRateRegular;
+    }
+    /*
+     * getter method to get ratings of the hotel
+     */
+    public double getRatings() {
+        return ratings;
+    }
+    /*
+     * setter method to set the ratings of a hotel
+     */
+    public void setRatings(double ratings) {
+        this.ratings = ratings;
     }
 }

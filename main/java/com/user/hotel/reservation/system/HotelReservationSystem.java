@@ -1,6 +1,4 @@
 package com.user.hotel.reservation.system;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 /**
  * class to store the hotels in a list
@@ -18,9 +16,9 @@ public class HotelReservationSystem {
      * @param weekdayRateRegular price on a week day for a regular customer
      * @return nothing
      */
-    public void addHotel(String hotelName,double weekdayRateRegular,double weekendRateRegular)
+    public void addHotel(String hotelName,double weekdayRateRegular,double weekendRateRegular,double ratings)
     {
-        hotelReservation.add(new Hotel(hotelName,weekdayRateRegular,weekendRateRegular));
+        hotelReservation.add(new Hotel(hotelName,weekdayRateRegular,weekendRateRegular,ratings));
     }
     /**
      * to get the number of hotels in the reservation system
@@ -40,7 +38,7 @@ public class HotelReservationSystem {
     {
         List<Integer> days=new ArrayList<>();
         Date i=checkIn;
-        while(i.compareTo(checkOut)==-1)
+        while(i.compareTo(checkOut)!=1)
         {
             Calendar cal=Calendar.getInstance();
             cal.setTime(i);
