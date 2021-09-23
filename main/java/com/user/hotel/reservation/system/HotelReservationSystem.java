@@ -16,9 +16,9 @@ public class HotelReservationSystem {
      * @param weekdayRateRegular price on a week day for a regular customer
      * @return nothing
      */
-    public void addHotel(String hotelName,double weekdayRateRegular,double weekendRateRegular,double ratings)
+    public void addHotel(String hotelName,double weekdayRateRegular,double weekendRateRegular,double ratings,double weekdayRateReward,double weekendRateReward)
     {
-        hotelReservation.add(new Hotel(hotelName,weekdayRateRegular,weekendRateRegular,ratings));
+        hotelReservation.add(new Hotel(hotelName,weekdayRateRegular,weekendRateRegular,ratings,weekdayRateReward,weekendRateReward));
     }
     /**
      * to get the number of hotels in the reservation system

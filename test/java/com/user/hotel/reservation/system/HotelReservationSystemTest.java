@@ -9,9 +9,9 @@ public class HotelReservationSystemTest {
     @Test
     public void CheckIfHotelIsAdded() throws ParseException
     {
-        hotelSystem.addHotel("Lakewood",110,90,3);
-        hotelSystem.addHotel("Ridgewood",220,150,5);
-        hotelSystem.addHotel("Bridgewood",150,50,4);
+        hotelSystem.addHotel("Lakewood",110,90,3,80,80);
+        hotelSystem.addHotel("Ridgewood",220,150,5,100,40);
+        hotelSystem.addHotel("Bridgewood",150,50,4,110,50);
         int entry=hotelSystem.countHotels();
         assertEquals(3,entry);    
         SimpleDateFormat formatter = new SimpleDateFormat("ddMMMyyyy", Locale.ENGLISH);
